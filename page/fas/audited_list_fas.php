@@ -39,6 +39,16 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
+                   <div class="row">
+      <div class="col-4">
+       <label><h3 style="color: red;"><b>Pending:</b></h3></label>
+       <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+      </div>
+      <div class="col-3 float-sm-left" id="count_for_update_data_fas">
+        
+      </div>
+    </div>
+                  <br>
                     <div class="row">
             <table>
               <tr>
@@ -56,7 +66,20 @@
                 <span for="">Line Name:</span>  <input type="text" id="linename_audited_fas" class="form-control" autocomplete=off> 
                   </div>
                 </th>
-              
+                <th></th><th></th><th></th><th></th><th></th><th></th>
+                <th>
+                  <div class="row">
+                      <div class="col-4">
+                <span>Car Maker: </span>
+                  <input type="text" name="carmaker" id="carmaker" class="form-control">
+                    </div>
+                    <div class="col-4">
+                  <span>Car Model: </span>
+                  <input type="text" name="carmodel" id="carmodel" class="form-control">
+                  </div>
+                    
+                  </div>
+                </th>
                 </div>
               </tr>
 

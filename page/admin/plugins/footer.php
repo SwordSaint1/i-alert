@@ -1,8 +1,17 @@
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2022. Developed by: JJ Buendia</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.0.0
+    </div>
+  </footer>
 <?php
 //MODALS
 include '../../modals/logout.php';
 include '../../modals/admin/add_audit.php';
 include '../../modals/admin/add_line_audit.php';
+include '../../modals/admin/update_audit.php';
+include '../../modals/admin/update_lineaudit.php';
 include '../../modals/admin/import_audit.php';
 include '../../modals/admin/import_line_audit.php';
 include '../../modals/admin/count.php';

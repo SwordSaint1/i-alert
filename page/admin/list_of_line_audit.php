@@ -1,4 +1,3 @@
-
 <?php include 'plugins/navbar.php';?>
 <?php include 'plugins/sidebar/list_of_line_auditbar.php';?>
 
@@ -64,30 +63,6 @@
                     </div>
                   </div>
                 </th>
-                <th>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
- 								<th>
- 									<div class="row">
-
- 									<div class="col-5">
- 							<span style="color: white;">a</span>
- 							<button class="btn btn-success" onclick="export_Line_audit_list('line_audit_list_data')">Export</button>
- 									</div>
- 									</div>
- 							
-                  
-                  </div>
-                </th>
  							</tr>
 
  						
@@ -101,10 +76,40 @@
                   </div>
                 </div>
               </div>
+
+                <div class="row">
+                
+                <div class="col-12">
+                  <table>
+              <tr>
+                <th>
+                  <div class="row">
+                    <div class="col-6">
+                 <button class="btn btn-secondary" onclick="uncheck_all()">Uncheck</button>
+                    </div>
+                    <div class="col-6">
+                  <button class="btn btn-success" onclick="export_Line_audit_list('line_audit_list_data')">Export</button>
+                    </div>
+                </th>
+                <th>
+                    <div class="row">
+
+                  <div class="col-5">
+              <button class="btn btn-danger" onclick="delete_lineaudit()">Delete</button>
+                  </div>
+                </div>
+                </th>
+        </table>
+      </div>
+            </div>
+
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0" style="height: 420px;">
                 <table class="table table-head-fixed text-nowrap table-hover" id="line_audit_list_data">
                  <thead>
+                     <th style="text-align:center;">
+                      <input type="checkbox" name="" id="check_all_line" onclick="select_all_func()">
+                    </th>
                     <th style="text-align:center;">#</th>
                     <th style="text-align:center; display: none;">Audit Code:</th>
                     <th style="text-align:center;">Date Audited</th>

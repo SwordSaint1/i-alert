@@ -11,72 +11,130 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">List of Audit Findings</h1>
+            <h1 class="m-0">List of Audited Checked</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">List of Audit Findings</li>
+              <li class="breadcrumb-item active">List of Audited Checked</li>
             </ol>
-          </div><!-- /.col -->
+          </div>
+           <div class="col-sm-6">
+              <div class="row">
+                    <div class="col-6">
+                <label for="">Audited Date From:</label> <input type="date" id="rtsauditedlistcheckeddatefrom" class="form-control" value="<?=$server_month;?>" autocomplete=off>
+                    </div>
+                    <div class="col-6">
+                <label for="">Audited Date To:</label>  <input type="date" id="rtsauditedlistcheckeddateto" class="form-control" value="<?=$server_date_only;?>" autocomplete=off> 
+                  </div>
+          </div>
+          <!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-       <div class="row">
+    <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                		<div class="row">
- 						<table>
- 							<tr>
- 								<th>
- 									<div class="row">
- 										<div class="col-6">
- 								<span for="">Audited Date From:</span> <input type="date" id="pendingrequestDateFrom" class="form-control" value="2022-01-01" autocomplete=off>
- 										</div>
- 										<div class="col-6">
- 								<span for="">Audited Date To:</span>  <input type="date" id="pendingrequestDateTo" class="form-control" value="2022-01-28" autocomplete=off> 
+                    <div class="row">
+            <table>
+              <tr>
+                <th>
+                  <div class="row">
+                    <div class="col-4">
+                <span>Employee ID: </span>
+                  <input type="text" name="empid" id="empid_audited_rts_checked" class="form-control">
+                    </div>
+                    <div class="col-4">
+                  <span>Full Name: </span>
+                  <input type="text" name="fname" id="fname_audited_rts_checked" class="form-control">
+                  </div>
+                     <div class="col-4">
+                <span for="">Line Name:</span>  <input type="text" id="linename_audited_rts_checked" class="form-control" autocomplete=off> 
+                  </div>
+                </th>
+              
+                </div>
+              </tr>
 
- 								</th>
- 								</div>
- 								</div>
- 								<th>
- 								</th>
- 								<th>
- 								</th>
- 								<th>
- 								</th>
- 								<th>
- 									<div class="row">
- 								
- 									<div class="col-5">
- 							<span style="color: white;">a</span>
- 							<button class="btn btn-success">Export</button>
- 									</div>
- 									</div>
- 								</th>
- 							</tr>
-
- 						
- 						</table>
- 					</div>
+            
+            </table>
+          </div>
                 </h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 100px;">
-                    <button class="btn btn-primary" id="searchReqBtn" onclick="load_pending()">Search <i class="fas fa-search"></i></button> 
+                    <button class="btn btn-primary" id="searchReqBtn" onclick="load_list_of_audited_findings_rts_checked()">Search <i class="fas fa-search"></i></button> 
+
                   </div>
                 </div>
               </div>
+              
               <!-- /.card-header -->
+              <div class="row">
+                
+                <div class="col-12">
+                  <table>
+              <tr>
+                <th>
+                  <div class="row">
+                    <div class="col-6">
+                 <button class="btn btn-secondary" onclick="uncheck_all()">Uncheck</button>
+                    </div>
+                    <div class="col-6">
+               <button class="btn btn-success " onclick="export_audited_list_rts_checked('audited_list_data_rts_checked')">Export</button>
+
+                </th>
+                </div>
+                </div>
+                <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                    <div class="row">
+
+                  <div class="col-12">
+                          
+                          <select class="form-control" id="status_rts_checked">
+                          <option value="">Select Status</option>
+                          <option value="Recieved"> Recieved</option>
+                        
+                        </select>
+                  </div>
+                
+                  </div>
+                </th>
+                 <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+    
+          <th> <div class="row">
+                     <div class="col-12 float-sm-right">
+                        <button class="btn btn-primary float-sm-right" onclick="update_status_rts_checked()">Update</button>
+                  </div></th>
+                </div>
+        </table>
+            
+                 
+             
+              <br>
               <div class="card-body table-responsive p-0" style="height: 420px;">
-                <table class="table table-head-fixed text-nowrap table-hover">
+                <table class="table table-head-fixed text-nowrap table-hover" id="audited_list_data_rts_checked">
                  <thead>
+                    <th style="text-align:center;">
+                      <input type="checkbox" name="" id="check_all_rts_checked" onclick="select_all_func()">
+                    </th>
                     <th style="text-align:center;">#</th>
+                    <th style="text-align:center; display: none;">Audit Code:</th>
                     <th style="text-align:center;">Date Audited</th>
                     <th style="text-align:center;">Full Name</th>
                     <th style="text-align:center;">Employee ID</th>
@@ -89,10 +147,27 @@
                     <th style="text-align:center;">Audit Findings</th>
                     <th style="text-align:center;">Audited By</th>
                     <th style="text-align:center;">Audit Category</th>
-                    <th style="text-align:center;">Remarks</th>              
+                    <th style="text-align:center;">Remarks</th> 
+                    <th style="text-align:center;">PD Status</th>              
+                    <!-- <th style="text-align:center;">AGENCY Status</th>  -->
+                    <th style="text-align:center;">HR Status</th> 
+
                 </thead>
-                <tbody id="request_data" style="text-align:center;"></tbody>
+                <tbody id="audited_data_rts_checked" style="text-align:center;"></tbody>
                 </table>
+                <div class="row">
+                  <div class="col-6">
+                    
+                  </div>
+                  <div class="col-6">
+                      <input type="hidden" name="" id="audited_data_rts_checked">
+   
+                    <div class="spinner" id="spinner" style="display:none;">
+                        
+                        <div class="loader float-sm-center"></div>    
+                    </div>
+             
+                  </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -108,3 +183,4 @@
 
 
 <?php include 'plugins/footer.php';?>
+<?php include 'plugins/script/checked_script.php'; ?>

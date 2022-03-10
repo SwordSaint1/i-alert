@@ -34,7 +34,7 @@ if ($method == 'fetch_audited_list') {
                  echo '<td>'.$x['full_name'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
@@ -83,7 +83,7 @@ if ($method == 'fetch_line_audited_list') {
                 echo '<td>'.$c.'</td>';
                 echo '<td style="display: none;">'.$x['batch'].'</td>';
                 echo '<td>'.$x['date_audited'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';

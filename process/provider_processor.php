@@ -9,13 +9,15 @@ if ($method == 'fetch_audited_list_provider') {
   	$dateFrom = $_POST['dateFrom'];
         $dateTo = $_POST['dateTo'];
         $empid =$_POST['empid'];
-	$fname =$_POST['fname'];
+	    $fname =$_POST['fname'];
         $esection = $_POST['esection'];
         $lname = $_POST['lname'];
+        $carmaker = $_POST['carmaker'];
+        $carmodel = $_POST['carmodel'];
         $c = 0;
 
     $query = "SELECT * FROM ialert_audit
-    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = '$esection' AND agency IS NULL
+    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = '$esection' AND agency IS NULL
      GROUP BY id ORDER BY date_audited ASC";
 
     $stmt = $conn->prepare($query);
@@ -24,8 +26,12 @@ if ($method == 'fetch_audited_list_provider') {
         foreach($stmt->fetchALL() as $x){
         $c++;
 
-               
-                echo '<tr">';
+        $date_audited = $x['date_audited'];
+        $agency = $x['agency'];
+        $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
+            
+            if ($agency == '' && $server_date_only >= $days_notif) {
+                echo '<tr style="color:red;">';
                   echo '<td>';
                 echo '<p>
                         <label>
@@ -40,7 +46,7 @@ if ($method == 'fetch_audited_list_provider') {
                  echo '<td>'.$x['full_name'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
@@ -52,12 +58,43 @@ if ($method == 'fetch_audited_list_provider') {
                    // echo '<td>'.$x['pd'].'</td>';
                     echo '<td>'.$x['agency'].'</td>';
                      // echo '<td>'.$x['hr'].'</td>';
-                      
-
   
                 echo '</tr>';
+            }else{
+
+                 echo '<tr>';
+                  echo '<td>';
+                echo '<p>
+                        <label>
+                            <input type="checkbox" name="" id="" class="singleCheck" value="'.$x['id'].'">
+                            <span></span>
+                        </label>
+                    </p>';
+                echo '</td>';
+                echo '<td>'.$c.'</td>';
+                echo '<td style="display: none;">'.$x['batch'].'</td>';
+                echo '<td>'.$x['date_audited'].'</td>';
+                 echo '<td>'.$x['full_name'].'</td>';
+                echo '<td>'.$x['employee_num'].'</td>';
+                echo '<td>'.$x['provider'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
+                echo '<td>'.$x['car_maker'].'</td>';
+                echo '<td>'.$x['car_model'].'</td>';
+                echo '<td>'.$x['line_no'].'</td>';
+                echo '<td>'.$x['process'].'</td>';
+                 echo '<td>'.$x['audit_findings'].'</td>';
+                  echo '<td>'.$x['audited_by'].'</td>';
+                  echo '<td>'.$x['audited_categ'].'</td>';
+                   echo '<td>'.$x['remarks'].'</td>';
+                   // echo '<td>'.$x['pd'].'</td>';
+                    echo '<td>'.$x['agency'].'</td>';
+                     // echo '<td>'.$x['hr'].'</td>';
+  
+                echo '</tr>';
+           
           
     }
+            }
 }else{
         echo '<tr>';
             echo '<td colspan="14" style="text-align:center;">NO RESULT</td>';
@@ -109,7 +146,7 @@ if ($method == 'fetch_audited_list_provider_status') {
         $c++;
 
                
-                echo '<tr">';
+                echo '<tr>';
                    echo '<td>';
                 echo '<p>
                         <label>
@@ -125,7 +162,7 @@ if ($method == 'fetch_audited_list_provider_status') {
                  echo '<td>'.$x['full_name'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
@@ -179,13 +216,15 @@ if ($method == 'fetch_audited_list_fas') {
     $dateFrom = $_POST['dateFrom'];
         $dateTo = $_POST['dateTo'];
         $empid =$_POST['empid'];
-    $fname =$_POST['fname'];
+        $fname =$_POST['fname'];
         $esection = $_POST['esection'];
         $lname = $_POST['lname'];
+        $carmaker = $_POST['carmaker'];
+        $carmodel = $_POST['carmodel'];
         $c = 0;
 
     $query = "SELECT * FROM ialert_audit
-    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = '$esection' AND pd IS NULL AND hr IS NULL
+    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%'  AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = '$esection' AND pd IS NULL AND hr IS NULL
      GROUP BY id ORDER BY date_audited ASC";
 
     $stmt = $conn->prepare($query);
@@ -194,8 +233,14 @@ if ($method == 'fetch_audited_list_fas') {
         foreach($stmt->fetchALL() as $x){
         $c++;
 
+
+         $date_audited = $x['date_audited'];
+        $pd = $x['pd'];
+        $hr = $x['hr'];
+        $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
                
-                echo '<tr">';
+              if ($pd == '' && $hr == '' && $server_date_only >= $days_notif) {
+                    echo '<tr style="color:red;">';
                   echo '<td>';
                 echo '<p>
                         <label>
@@ -210,7 +255,7 @@ if ($method == 'fetch_audited_list_fas') {
                  echo '<td>'.$x['full_name'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
@@ -226,6 +271,40 @@ if ($method == 'fetch_audited_list_fas') {
 
   
                 echo '</tr>';
+               } else{
+                   echo '<tr>';
+                  echo '<td>';
+                echo '<p>
+                        <label>
+                            <input type="checkbox" name="" id="" class="singleCheck" value="'.$x['id'].'">
+                            <span></span>
+                        </label>
+                    </p>';
+                echo '</td>';
+                echo '<td>'.$c.'</td>';
+                echo '<td style="display: none;">'.$x['batch'].'</td>';
+                echo '<td>'.$x['date_audited'].'</td>';
+                 echo '<td>'.$x['full_name'].'</td>';
+                echo '<td>'.$x['employee_num'].'</td>';
+                echo '<td>'.$x['provider'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
+                echo '<td>'.$x['car_maker'].'</td>';
+                echo '<td>'.$x['car_model'].'</td>';
+                echo '<td>'.$x['line_no'].'</td>';
+                echo '<td>'.$x['process'].'</td>';
+                 echo '<td>'.$x['audit_findings'].'</td>';
+                  echo '<td>'.$x['audited_by'].'</td>';
+                  echo '<td>'.$x['audited_categ'].'</td>';
+                   echo '<td>'.$x['remarks'].'</td>';
+                   // echo '<td>'.$x['pd'].'</td>';
+                    echo '<td>'.$x['agency'].'</td>';
+                     // echo '<td>'.$x['hr'].'</td>';
+                      
+
+  
+                echo '</tr>';
+               }
+               
           
     }
 }else{
@@ -295,7 +374,7 @@ if ($method == 'fetch_audited_list_fass_status') {
                  echo '<td>'.$x['full_name'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
@@ -343,4 +422,57 @@ if ($method == 'update_fass') {
             echo 'fail';
         }
 } 
+
+if ($method == 'count_for_update_fas') {
+    $server_date = $_POST['server_date'];
+    $count = "SELECT *,count(*) as total FROM ialert_audit ";
+    $stmt = $conn->prepare($count);
+    $stmt->execute();
+    foreach($stmt->fetchALL() as $x){
+
+        $date_audited = $x['date_audited'];
+        $pd = $x['pd'];
+        $agency = $x['agency'];
+        $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
+
+            $count_na = "SELECT COUNT(*) as total FROM ialert_audit WHERE  pd IS NULL AND provider = 'FAS'";
+            $stmt2 = $conn->prepare($count_na);
+            $stmt2->execute();
+            foreach($stmt2->fetchALL() as $j){
+                        echo '<tr>';
+
+        echo '<td ><h3 style="color:red;"><b>'.$j['total'].'</b></h3></td>';
+                
+        echo '</tr>';
+            }
+         
+    }
+}
+
+
+if ($method == 'count_for_update_provider') {
+    $server_date = $_POST['server_date'];
+    $count = "SELECT *,count(*) as total FROM ialert_audit ";
+    $stmt = $conn->prepare($count);
+    $stmt->execute();
+    foreach($stmt->fetchALL() as $x){
+
+        $date_audited = $x['date_audited'];
+        $pd = $x['pd'];
+        $agency = $x['agency'];
+        $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
+
+            $count_na = "SELECT COUNT(*) as total FROM ialert_audit WHERE  agency IS NULL AND provider != 'FAS'";
+            $stmt2 = $conn->prepare($count_na);
+            $stmt2->execute();
+            foreach($stmt2->fetchALL() as $j){
+                        echo '<tr>';
+
+        echo '<td ><h3 style="color:red;"><b>'.$j['total'].'</b></h3></td>';
+                
+        echo '</tr>';
+            }
+         
+    }
+}
 ?>

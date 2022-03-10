@@ -27,7 +27,6 @@
                     <div class="col-4">
                 <label for="">Audited Date To:</label>  <input type="date" id="auditeddateto" class="form-control" value="<?=$server_date_only;?>" autocomplete=off> 
                   </div>
-                 
           </div>
           <!-- /.col -->
         </div><!-- /.row -->
@@ -41,50 +40,50 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                		<div class="row">
- 						<table>
- 							<tr>
- 								<th>
- 									<div class="row">
- 										<div class="col-4">
- 								 <span>Employee ID: </span>
+                  <div class="row">
+      <div class="col-4">
+       <label><h3 style="color: red;"><b>Pending:</b></h3></label>
+       <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+      </div>
+      <div class="col-3 float-sm-left" id="count_for_update_data">
+        
+      </div>
+    </div>
+                  <br>
+                    <div class="row">
+            <table>
+              <tr>
+                <th>
+                  <div class="row">
+                    <div class="col-4">
+                 <span>Employee ID: </span>
                   <input type="text" name="empid" id="empid" class="form-control">
- 										</div>
- 										<div class="col-4">
- 							<span>Full Name: </span>
+                    </div>
+                    <div class="col-4">
+              <span>Full Name: </span>
                   <input type="text" name="fname" id="fname" class="form-control">
                   </div>
                   <div class="col-4">
               <span>Line No: </span>
                   <input type="text" name="linen" id="linen" class="form-control">
                   </div>
- 								</th>
- 								</div>
- 								</div>
- 							
+                </th>
+                <th></th><th></th><th></th><th></th>
                 <th>
-                </th>
- 								<th>
- 									<div class="row">
-
- 									<div class="col-5">
- 							<span style="color: white;">a</span>
- 							<button class="btn btn-info" data-toggle="modal" data-target="#count">Count</button>
- 									</div>
-                  <div class="col-5">
-              <span style="color: white;">a</span>
-              <button class="btn btn-success" onclick="export_audit_list('audit_list_data')">Export</button>
+                  <div class="row">
+                    <div class="col-4">
+                 <span>Car Maker: </span>
+                  <input type="text" name="carmaker" id="carmaker" class="form-control">
+                    </div>
+                    <div class="col-4">
+              <span>Car Model: </span>
+                  <input type="text" name="carmodel" id="carmodel" class="form-control">
                   </div>
- 									</div>
- 							
-                  
-                  </div>
+                 
                 </th>
- 							</tr>
-
- 						
- 						</table>
- 					</div>
+              </tr>
+            </table>
+          </div>
                 </h3>
 
                 <div class="card-tools">
@@ -93,10 +92,64 @@
                   </div>
                 </div>
               </div>
+
+                  <!-- /.card-header -->
+              <div class="row">
+                
+                <div class="col-12">
+                  <table>
+              <tr>
+                <th>
+                  <div class="row">
+                    <div class="col-6">
+                 <button class="btn btn-secondary" onclick="uncheck_all()">Uncheck</button>
+                    </div>
+                    <div class="col-6">
+               <button class="btn btn-success " onclick="export_audit_list('audit_list_data')">Export</button>
+                    </div>
+                </th>
+                <th>
+                    <div class="row">
+
+                  <div class="col-5">
+              <button class="btn btn-info" data-toggle="modal" data-target="#count">Count</button>
+                  </div>
+                </div>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+                 <th>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+    
+          <th> <div class="row">
+                     <div class="col-12 float-sm-right">
+                        <button class="btn btn-danger float-sm-right" onclick="delete_audit()">Delete</button>
+                  </div></th>
+                </div>
+              </th>
+        </table>
+      </div>
+            </div>
+
+                 
+             
+              <br>
+
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0" style="height: 420px;">
                 <table class="table table-head-fixed text-nowrap table-hover" id="audit_list_data">
                  <thead>
+                    <th style="text-align:center;">
+                      <input type="checkbox" name="" id="check_all_audit" onclick="select_all_func()">
+                    </th>
                     <th style="text-align:center;">#</th>
                     <th style="text-align:center; display: none;">Audit Code:</th>
                     <th style="text-align:center;">Date Audited</th>
@@ -142,6 +195,7 @@
 </div>
 </div>
 </section>
+
 
  
 

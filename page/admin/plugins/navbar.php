@@ -9,7 +9,7 @@ if($role == 'admin'){
         session_destroy();
         header('location: ../../index.php');
     }
-
+  
 
 ?>  
 <!DOCTYPE html>

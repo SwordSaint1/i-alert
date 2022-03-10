@@ -45,6 +45,11 @@
                 </div>
               </form>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
 
 <?php include 'plugins/footer.php';?>

@@ -61,7 +61,7 @@ if ($method == 'insert_audit') {
 // 		echo 'Already Have Audit Data';
 	
 // 	}else{
-		$insert = "INSERT INTO ialert_audit (`batch`, `date_audited`, `full_name`,`employee_num`,`provider`,`position`,`shift`,`group`,`car_maker`,`car_model`,`line_no`,`process`,`audit_findings`,`audited_by`,`audited_categ`,`audit_type`,`remarks`,`pd`,`hr`,`agency`,`date_created`) VALUES('$audit_code', '$date_audited','$full_name','$employee_num','$provider','$position','$shift','$group','$carmaker','$carmodel','$emline','$emprocess','$audit_findings','$audited_by','$audit_categ','$audit_type','$remarks',NULL,NULL,NULL,'$server_date_time')";
+		$insert = "INSERT INTO ialert_audit (`batch`, `date_audited`, `full_name`,`employee_num`,`provider`,`position`,`shift`,`groups`,`car_maker`,`car_model`,`line_no`,`process`,`audit_findings`,`audited_by`,`audited_categ`,`audit_type`,`remarks`,`pd`,`hr`,`agency`,`date_created`) VALUES('$audit_code', '$date_audited','$full_name','$employee_num','$provider','$position','$shift','$group','$carmaker','$carmodel','$emline','$emprocess','$audit_findings','$audited_by','$audit_categ','$audit_type','$remarks',NULL,NULL,NULL,'$server_date_time')";
 		$stmt= $conn->prepare($insert);
 		if ($stmt->execute()) {
 
@@ -93,7 +93,7 @@ if ($method == 'prev_audit') {
 		echo '<td>'.$x['provider'].'</td>';
 		echo '<td>'.$x['position'].'</td>';
 		echo '<td>'.$x['shift'].'</td>';
-		echo '<td>'.$x['group'].'</td>';			
+		echo '<td>'.$x['groups'].'</td>';			
 		echo '<td>'.$x['car_maker'].'</td>';
 		echo '<td>'.$x['car_model'].'</td>';
 		echo '<td>'.$x['line_no'].'</td>';
@@ -112,10 +112,12 @@ if ($method == 'prev_audit') {
         $empid =$_POST['empid'];
 		$fname =$_POST['fname'];
 		$line = $_POST['line'];
+		$carmaker = $_POST['carmaker'];
+		$carmodel = $_POST['carmodel'];
         $c = 0;
 
     $query = "SELECT * FROM ialert_audit
-    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$line%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo') 
+    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%' AND line_no LIKE '$line%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo') 
      GROUP BY id ORDER BY date_audited ASC";
 
 
@@ -125,16 +127,30 @@ if ($method == 'prev_audit') {
     if ($stmt->rowCount() > 0) {
         foreach($stmt->fetchALL() as $x){
         $c++;
+        $date_audited = $x['date_audited'];
+        $pd = $x['pd'];
+        $agency = $x['agency'];
+        $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
 
            
-                echo '<tr">';
+               
+        if ($pd == '' && $agency == '' && $server_date_only >= $days_notif) {
+        	  echo '<tr style="color:red;">'; 
+                   echo '<td>';
+                echo '<p>
+                        <label>
+                            <input type="checkbox" name="" id="" class="singleCheck" value="'.$x['id'].'">
+                            <span></span>
+                        </label>
+                    </p>';
+                echo '</td>';
                 echo '<td>'.$c.'</td>';
                 echo '<td style="display: none;">'.$x['batch'].'</td>';
                 echo '<td>'.$x['date_audited'].'</td>';
-                 echo '<td>'.$x['full_name'].'</td>';
+                 echo '<td  style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#update" onclick="get_set(&quot;'.$x['id'].'~!~'.$x['employee_num'].'~!~'.$x['full_name'].'~!~'.$x['position'].'~!~'.$x['provider'].'~!~'.$x['shift'].'~!~'.$x['groups'].'~!~'.$x['audit_type'].'~!~'.$x['audited_categ'].'~!~'.$x['car_maker'].'~!~'.$x['car_model'].'~!~'.$x['line_no'].'~!~'.$x['process'].'~!~'.$x['audit_findings'].'~!~'.$x['audited_by'].'~!~'.$x['date_audited'].'~!~'.$x['remarks'].'&quot;)">'.$x['full_name'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
@@ -150,8 +166,42 @@ if ($method == 'prev_audit') {
 
   
                 echo '</tr>';
+
+        }else{
+        	  echo '<tr>'; 
+                   echo '<td>';
+                echo '<p>
+                        <label>
+                            <input type="checkbox" name="" id="" class="singleCheck" value="'.$x['id'].'">
+                            <span></span>
+                        </label>
+                    </p>';
+                echo '</td>';
+                echo '<td>'.$c.'</td>';
+                echo '<td style="display: none;">'.$x['batch'].'</td>';
+                echo '<td>'.$x['date_audited'].'</td>';
+                 echo '<td>'.$x['full_name'].'</td>';
+                echo '<td>'.$x['employee_num'].'</td>';
+                echo '<td>'.$x['provider'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
+                echo '<td>'.$x['car_maker'].'</td>';
+                echo '<td>'.$x['car_model'].'</td>';
+                echo '<td>'.$x['line_no'].'</td>';
+                echo '<td>'.$x['process'].'</td>';
+                 echo '<td style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#update" onclick="get_set(&quot;'.$x['id'].'~!~'.$x['employee_num'].'~!~'.$x['full_name'].'~!~'.$x['position'].'~!~'.$x['provider'].'~!~'.$x['shift'].'~!~'.$x['groups'].'~!~'.$x['audit_type'].'~!~'.$x['audited_categ'].'~!~'.$x['car_maker'].'~!~'.$x['car_model'].'~!~'.$x['line_no'].'~!~'.$x['process'].'~!~'.$x['audit_findings'].'~!~'.$x['audited_by'].'~!~'.$x['date_audited'].'~!~'.$x['remarks'].'&quot;)">'.$x['audit_findings'].'</td>';
+                  echo '<td>'.$x['audited_by'].'</td>';
+                  echo '<td>'.$x['audited_categ'].'</td>';
+                   echo '<td>'.$x['remarks'].'</td>';
+                   echo '<td>'.$x['pd'].'</td>';
+                    echo '<td>'.$x['agency'].'</td>';
+                     echo '<td>'.$x['hr'].'</td>';
+                      
+
+  
+                echo '</tr>';
           
     }
+        }
 }else{
         echo '<tr>';
             echo '<td colspan="14" style="text-align:center;">NO RESULT</td>';
@@ -200,7 +250,7 @@ if ($method == 'insert_line_audit') {
 // 		echo 'Already Have Line Audit Data';
 	
 // 	}else{
-		$insert = "INSERT INTO ialert_line_audit (`batch`, `date_audited`,`shift`,`group`,`car_maker`,`car_model`,`line_no`,`process`,`audit_findings`,`audited_by`,`audited_categ`,`audit_type`,`remarks`,`date_created`) VALUES('$audit_code', '$date_audited','$shift','$group','$carmaker','$carmodel','$emline','$emprocess','$audit_findings','$audited_by','$audit_categ','$audit_type','$remarks','$server_date_time')";
+		$insert = "INSERT INTO ialert_line_audit (`batch`, `date_audited`,`shift`,`groups`,`car_maker`,`car_model`,`line_no`,`process`,`audit_findings`,`audited_by`,`audited_categ`,`audit_type`,`remarks`,`date_created`) VALUES('$audit_code', '$date_audited','$shift','$group','$carmaker','$carmodel','$emline','$emprocess','$audit_findings','$audited_by','$audit_categ','$audit_type','$remarks','$server_date_time')";
 		$stmt= $conn->prepare($insert);
 		if ($stmt->execute()) {
 
@@ -229,7 +279,7 @@ if ($method == 'prev_line_audit') {
 		echo '<td>'.$c.'</td>';
 		echo '<td>'.$x['date_audited'].'</td>';
 		echo '<td>'.$x['shift'].'</td>';
-		echo '<td>'.$x['group'].'</td>';			
+		echo '<td>'.$x['groups'].'</td>';			
 		echo '<td>'.$x['car_maker'].'</td>';
 		echo '<td>'.$x['car_model'].'</td>';
 		echo '<td>'.$x['line_no'].'</td>';
@@ -262,17 +312,25 @@ if ($method == 'prev_line_audit') {
         $c++;
 
            
-                echo '<tr">';
-                echo '<td>'.$c.'</td>';
+                 echo '<tr>';
+                   echo '<td>';
+                echo '<p>
+                        <label>
+                            <input type="checkbox" name="" id="" class="singleCheck" value="'.$x['id'].'">
+                            <span></span>
+                        </label>
+                    </p>';
+                echo '</td>';
+                echo '<td >'.$c.'</td>';
                 echo '<td style="display: none;">'.$x['batch'].'</td>';
                 echo '<td>'.$x['date_audited'].'</td>';
                 echo '<td>'.$x['shift'].'</td>';
-                echo '<td>'.$x['group'].'</td>';
+                echo '<td>'.$x['groups'].'</td>';
                 echo '<td>'.$x['car_maker'].'</td>';
                 echo '<td>'.$x['car_model'].'</td>';
                 echo '<td>'.$x['line_no'].'</td>';
                 echo '<td>'.$x['process'].'</td>';
-                 echo '<td>'.$x['audit_findings'].'</td>';
+                 echo '<td style="cursor:pointer;" class="modal-trigger" data-toggle="modal" data-target="#updateline" onclick="get_set_line(&quot;'.$x['id'].'~!~'.$x['shift'].'~!~'.$x['groups'].'~!~'.$x['date_audited'].'~!~'.$x['car_maker'].'~!~'.$x['car_model'].'~!~'.$x['line_no'].'~!~'.$x['process'].'~!~'.$x['audit_findings'].'~!~'.$x['audited_by'].'~!~'.$x['audited_categ'].'~!~'.$x['remarks'].'~!~'.$x['audit_type'].'&quot;)">'.$x['audit_findings'].'</td>';
                   echo '<td>'.$x['audited_by'].'</td>';
                   echo '<td>'.$x['audited_categ'].'</td>';
                   echo '<td>'.$x['audit_type'].'</td>';
@@ -309,4 +367,133 @@ if ($method == 'count_kana') {
 	}
 }
 
+
+if ($method == 'deleteaudit') {
+    $id = [];
+    $id = $_POST['id'];
+    //COUNT OF ITEM TO BE UPDATED
+    $count = count($id);
+    foreach($id as $x){
+        $update = "DELETE FROM ialert_audit WHERE id = '$x'";
+        $stmt = $conn->prepare($update);
+        if ($stmt->execute()) {
+            // echo 'approved';
+            $count = $count - 1;
+        }else{
+            // echo 'error';
+        }
+    }
+        if($count == 0){
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+} 
+
+if ($method == 'updateaudit') {
+    $id = $_POST['id'];
+    $employee_num = $_POST['employee_num'];
+	$full_name = $_POST['full_name'];
+	$position = $_POST['position'];
+	$provider = $_POST['provider'];
+	$shift = $_POST['shift'];
+	$groups = $_POST['groups'];
+	$audit_type = $_POST['audit_type'];
+	$audit_categ = $_POST['audit_categ'];
+	$carmaker = $_POST['carmaker'];
+	$carmodel = $_POST['carmodel'];
+	$emline = $_POST['emline'];
+	$process = $_POST['process'];
+	$audit_findings = $_POST['audit_findings'];
+	$audited_by = $_POST['audited_by'];
+	$date_audited = $_POST['date_audited'];
+	$remarks = $_POST['remarks'];
+    
+    $update = "UPDATE ialert_audit SET employee_num = '$employee_num', full_name = '$full_name', position = '$position', provider = '$provider', shift = '$shift', audit_type = '$audit_type', groups = '$groups', audit_type = '$audit_type', audited_categ = '$audit_categ', car_maker = '$carmaker', car_model = '$carmodel', line_no = '$emline', process = '$process',audit_findings = '$audit_findings', audited_by = '$audited_by', date_audited = '$date_audited', remarks = '$remarks', date_updated = '$server_date_only' WHERE id = '$id'";
+    $stmt = $conn->prepare($update);
+    if ($stmt->execute()) {
+    	echo 'success';
+    }else{
+    	echo 'Error';
+    }
+   
+} 
+
+
+if ($method == 'deletelineaudit') {
+    $id = [];
+    $id = $_POST['id'];
+    //COUNT OF ITEM TO BE UPDATED
+    $count = count($id);
+    foreach($id as $x){
+        $update = "DELETE FROM ialert_line_audit WHERE id = '$x'";
+        $stmt = $conn->prepare($update);
+        if ($stmt->execute()) {
+            // echo 'approved';
+            $count = $count - 1;
+        }else{
+            // echo 'error';
+        }
+    }
+        if($count == 0){
+            echo 'success';
+        }else{
+            echo 'fail';
+        }
+} 
+
+
+
+if ($method == 'updatelineaudit') {
+    $id = $_POST['id'];
+	$shift = $_POST['shift'];
+	$groups = $_POST['groups'];
+	$audit_type = $_POST['audit_type'];
+	$audit_categ = $_POST['audit_categ'];
+	$carmaker = $_POST['carmaker'];
+	$carmodel = $_POST['carmodel'];
+	$emline = $_POST['emline'];
+	$process = $_POST['process'];
+	$audit_findings = $_POST['audit_findings'];
+	$audited_by = $_POST['audited_by'];
+	$audit_type = $_POST['audit_type'];
+	$date_audited = $_POST['date_audited'];
+	$remarks = $_POST['remarks'];
+    
+    $update = "UPDATE ialert_line_audit SET shift = '$shift', audit_type = '$audit_type', groups = '$groups', audit_type = '$audit_type', audited_categ = '$audit_categ', car_maker = '$carmaker', car_model = '$carmodel', line_no = '$emline', process = '$process',audit_findings = '$audit_findings', audited_by = '$audited_by', date_audited = '$date_audited', remarks = '$remarks',audit_type = '$audit_type', date_updated = '$server_date_only' WHERE id = '$id'";
+    $stmt = $conn->prepare($update);
+    if ($stmt->execute()) {
+    	echo 'success';
+    }else{
+    	echo 'Error';
+    }
+   
+} 
+ 
+
+if ($method == 'count_for_update') {
+	$server_date = $_POST['server_date'];
+	$count = "SELECT *,count(*) as total FROM ialert_audit ";
+	$stmt = $conn->prepare($count);
+	$stmt->execute();
+	foreach($stmt->fetchALL() as $x){
+
+		$date_audited = $x['date_audited'];
+        $pd = $x['pd'];
+        $agency = $x['agency'];
+        $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
+
+        	$count_na = "SELECT COUNT(*) as total FROM ialert_audit WHERE  pd IS NULL AND agency IS NULL";
+        	$stmt2 = $conn->prepare($count_na);
+        	$stmt2->execute();
+        	foreach($stmt2->fetchALL() as $j){
+        				echo '<tr>';
+
+		echo '<td ><h3 style="color:red;"><b>'.$j['total'].'</b></h3></td>';
+				
+		echo '</tr>';
+        	}
+		 
+	}
+}
 ?>

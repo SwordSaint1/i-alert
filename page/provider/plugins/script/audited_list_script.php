@@ -1,5 +1,27 @@
 <script type="text/javascript">
-	
+$(document).ready(function(){
+    counts();
+}); 
+
+const counts =()=>{
+        var server_date = document.getElementById('server_date').value;
+        $.ajax({
+                url: '../../process/provider_processor.php',
+                type: 'POST',
+                cache: false,
+                data:{
+                    method: 'count_for_update_provider',
+                    server_date:server_date
+                    
+                    
+                },success:function(response){
+                    // console.log(response);
+                    document.getElementById('count_for_update_data_provider').innerHTML = response;   
+               
+                }
+            });
+}
+
 const load_list_of_audited_findings_provider =()=>{
     $('#spinner').css('display','block');
      var empid = document.getElementById('empid_audited_provider').value;
@@ -8,8 +30,8 @@ const load_list_of_audited_findings_provider =()=>{
      var dateFrom = document.getElementById('providerauditedlistdatefrom').value;
      var dateTo = document.getElementById('providerauditedlistdateto').value;
      var esection = '<?=$esection;?>';
-     console.log();
-     console.log();
+     var carmaker = document.getElementById('carmaker').value;
+     var carmodel = document.getElementById('carmodel').value;
            $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
@@ -21,7 +43,9 @@ const load_list_of_audited_findings_provider =()=>{
                     empid:empid,
                     fname:fname,
                     esection:esection,
-                    lname:lname
+                    lname:lname,
+                    carmaker:carmaker,
+                    carmodel:carmodel
                     
                 },success:function(response){
                     // console.log(response);
@@ -117,6 +141,7 @@ const update_status_status =()=>{
             console.log(response);
             if (response == 'success') {
              load_list_of_audited_findings_provider();
+             counts();
              uncheck_all();
                 swal('SUCCESS!', 'Success', 'success');
                 $('#status').val('');

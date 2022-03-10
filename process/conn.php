@@ -9,6 +9,16 @@
     $server_date_month_time = date('Y-m-01 H:i:s');
     $server_time = date('H:i:s');
 
+    $prefix = "AC:";
+        $dateCode = date('ymd');
+        $randomCode = mt_rand(10000,50000);
+        $ac = $prefix."".$dateCode."".$randomCode;
+
+     $prefixs = "LAC:";
+        $dateCodes = date('ymd');
+        $randomCodes = mt_rand(10000,50000);
+        $lc = $prefixs."".$dateCodes."".$randomCodes;
+
     try {
         $conn = new PDO ("mysql:host=$servername;dbname=ialert",$username,$pass);
 

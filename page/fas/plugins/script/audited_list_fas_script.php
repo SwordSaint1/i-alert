@@ -1,5 +1,27 @@
 <script type="text/javascript">
-	
+$(document).ready(function(){
+    counts();
+});	
+
+const counts =()=>{
+        var server_date = document.getElementById('server_date').value;
+        $.ajax({
+                url: '../../process/provider_processor.php',
+                type: 'POST',
+                cache: false,
+                data:{
+                    method: 'count_for_update_fas',
+                    server_date:server_date
+                    
+                    
+                },success:function(response){
+                    // console.log(response);
+                    document.getElementById('count_for_update_data_fas').innerHTML = response;   
+               
+                }
+            });
+}
+
 const load_list_of_audited_findings_fas =()=>{
     $('#spinner').css('display','block');
      var empid = document.getElementById('empid_audited_fas').value;
@@ -8,9 +30,9 @@ const load_list_of_audited_findings_fas =()=>{
      var dateFrom = document.getElementById('providerauditedlistfasdatefrom').value;
      var dateTo = document.getElementById('providerauditedlistfasdateto').value;
      var esection = '<?=$esection;?>';
-     console.log();
-     console.log();
-           $.ajax({
+     var carmaker = document.getElementById('carmaker').value;
+     var carmodel = document.getElementById('carmodel').value;
+                $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
                 cache: false,
@@ -21,7 +43,9 @@ const load_list_of_audited_findings_fas =()=>{
                     empid:empid,
                     fname:fname,
                     esection:esection,
-                    lname:lname
+                    lname:lname,
+                    carmaker:carmaker,
+                    carmodel:carmodel
                     
                 },success:function(response){
                     // console.log(response);
@@ -117,6 +141,7 @@ const update_status_fas =()=>{
             console.log(response);
             if (response == 'success') {
              load_list_of_audited_findings_fas();
+             counts();
              uncheck_all();
                 swal('SUCCESS!', 'Success', 'success');
                 $('#status_fas').val('');
@@ -128,4 +153,5 @@ const update_status_fas =()=>{
    }
 }
 }
+
 </script>
