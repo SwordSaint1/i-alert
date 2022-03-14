@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">List of Audited</h1>
+            <h1 class="m-0">List of Audited  <input type="hidden" name="section" id="section" value="<?=$section;?>"></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -43,11 +43,12 @@
       <div class="col-4">
        <label><h3 style="color: red;"><b>Pending:</b></h3></label>
        <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+       <input type="hidden" name="carmakers" id="carmakers" value="<?=$car_maker;?>">
       </div>
       <div class="col-3 float-sm-left" id="count_for_update_data_fas">
         
       </div>
-    </div>
+    </div> 
                   <br>
                     <div class="row">
             <table>

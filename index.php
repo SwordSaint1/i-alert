@@ -53,6 +53,7 @@
                     <option value="viewer">Viewer</option>
                     <option value="admin">Admin</option>
                     <option value="rts">RTS</option>
+                    <option value="hr">HR</option>
                     <option value="provider">Provider</option>
                     <option value="fas">FAS</option>
                         </select>

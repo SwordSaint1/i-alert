@@ -41,13 +41,21 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <div class="row">
-      <div class="col-4">
-       <label><h3 style="color: red;"><b>Pending:</b></h3></label>
-       <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+                     <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+    <!--   <div class="col-4">
+       <label></label>
+      
       </div>
-      <div class="col-3 float-sm-left" id="count_for_update_data">
+      <div class="col-3" id="count_for_update_data">
         
-      </div>
+      </div> -->
+
+            <table>
+              <tr>
+                <th style="color: red;"> <b>Pending:</b> &nbsp;</th>
+                <th id="count_for_update_data"></th>
+              </tr>
+            </table>
     </div>
                   <br>
                     <div class="row">

@@ -27,9 +27,9 @@
  			}else if($role == 'admin'){
                 $_SESSION['username'] = $username;
                 header('location: page/admin/dashboard.php');    
-            }else if($role == 'rts'){
+            }else if($role == 'hr'){
                 $_SESSION['username'] = $username;
-                header('location: page/rts/dashboard.php');    
+                header('location: page/hr/dashboard.php');    
             }
             else if($role == 'fas'){
                 $_SESSION['username'] = $username;

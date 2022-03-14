@@ -221,11 +221,28 @@ if ($method == 'fetch_audited_list_fas') {
         $lname = $_POST['lname'];
         $carmaker = $_POST['carmaker'];
         $carmodel = $_POST['carmodel'];
+        $section = $_POST['section'];
         $c = 0;
 
-    $query = "SELECT * FROM ialert_audit
-    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%'  AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = '$esection' AND pd IS NULL AND hr IS NULL
-     GROUP BY id ORDER BY date_audited ASC";
+    // $query = "SELECT * FROM ialert_audit
+    // WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%'  AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = '$esection' AND pd IS NULL AND hr IS NULL
+    //  GROUP BY id ORDER BY date_audited ASC";
+
+        $query ="SELECT ialert_audit.id,
+ialert_audit.batch,ialert_audit.date_audited,ialert_audit.full_name,ialert_audit.employee_num,
+ialert_audit.provider,ialert_audit.position,ialert_audit.shift,ialert_audit.groups,
+ialert_audit.car_maker,ialert_audit.car_model,ialert_audit.line_no,ialert_audit.process,
+ialert_audit.audit_findings,ialert_audit.audited_by,ialert_audit.audited_categ,ialert_audit.audit_type,
+ialert_audit.audit_type,ialert_audit.remarks,ialert_audit.pd,ialert_audit.hr,ialert_audit.agency,
+ialert_audit.penalty,ialert_audit.date_created,ialert_audit.date_updated,
+ialert_section.line_no,ialert_section.car_maker,ialert_account.sections
+FROM ialert_audit
+LEFT JOIN ialert_section ON ialert_audit.line_no = ialert_section.line_no
+LEFT JOIN ialert_account ON ialert_account.sections = ialert_section.section
+WHERE ialert_section.section = '$section' AND ialert_account.sections = '$section' AND
+ialert_audit.employee_num LIKE '$empid%' AND ialert_audit.full_name LIKE '$fname%' AND ialert_audit.car_maker LIKE '$carmaker%' AND ialert_audit.car_model LIKE '$carmodel%'  AND ialert_audit.line_no LIKE '$lname%' AND (ialert_audit.date_audited >='$dateFrom' AND ialert_audit.date_audited <= '$dateTo')  AND ialert_audit.provider = '$esection' AND ialert_audit.pd IS NULL AND ialert_audit.hr IS NULL
+     GROUP BY ialert_audit.id ORDER BY ialert_audit.date_audited ASC
+";
 
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -425,6 +442,8 @@ if ($method == 'update_fass') {
 
 if ($method == 'count_for_update_fas') {
     $server_date = $_POST['server_date'];
+    $car_maker = $_POST['car_maker'];
+    $esection = $_POST['esection'];
     $count = "SELECT *,count(*) as total FROM ialert_audit ";
     $stmt = $conn->prepare($count);
     $stmt->execute();
@@ -435,7 +454,7 @@ if ($method == 'count_for_update_fas') {
         $agency = $x['agency'];
         $days_notif = date("Y-m-d", strtotime('+4 day',strtotime($date_audited)));
 
-            $count_na = "SELECT COUNT(*) as total FROM ialert_audit WHERE  pd IS NULL AND provider = 'FAS'";
+            $count_na = "SELECT COUNT(*) as total FROM ialert_audit WHERE  pd IS NULL AND provider = 'FAS' AND car_maker = '$car_maker'";
             $stmt2 = $conn->prepare($count_na);
             $stmt2->execute();
             foreach($stmt2->fetchALL() as $j){

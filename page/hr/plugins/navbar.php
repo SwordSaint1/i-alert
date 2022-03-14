@@ -1,7 +1,7 @@
 <?php 
 //SESSION
 include '../../process/session.php';
-if($role == 'rts'){
+if($role == 'hr'){
         // DO NOTHING
     }else{
         // RESTRICT THE USER IF NOT LEVEL 2 and 3

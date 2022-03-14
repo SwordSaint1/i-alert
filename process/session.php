@@ -12,6 +12,8 @@
 				$name = $i['username'];
 				$role = $i['role'];
 				$esection = $i['esection'];
+				$car_maker = $i['car_maker'];
+				$section = $i['sections'];
 			}
 		}else{
 			session_unset();

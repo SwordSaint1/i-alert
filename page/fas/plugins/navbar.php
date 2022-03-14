@@ -17,7 +17,7 @@ if($role == 'fas'){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>iAlert | Admin</title>
+  <title>iAlert | Admin </title>
 
   <link rel="icon" href="../../dist/img/ialert.png" type="image/x-icon" />
   <!-- Google Font: Source Sans Pro -->

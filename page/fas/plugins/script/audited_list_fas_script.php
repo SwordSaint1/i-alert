@@ -5,14 +5,19 @@ $(document).ready(function(){
 
 const counts =()=>{
         var server_date = document.getElementById('server_date').value;
+        var car_maker = document.getElementById('carmakers').value;
+        var esection = '<?$esection;?>';
+
+        console.log(car_maker);
         $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
                 cache: false,
                 data:{
                     method: 'count_for_update_fas',
-                    server_date:server_date
-                    
+                    server_date:server_date,
+                    car_maker:car_maker,
+                    esection:esection
                     
                 },success:function(response){
                     // console.log(response);
@@ -21,7 +26,7 @@ const counts =()=>{
                 }
             });
 }
-
+ 
 const load_list_of_audited_findings_fas =()=>{
     $('#spinner').css('display','block');
      var empid = document.getElementById('empid_audited_fas').value;
@@ -32,6 +37,7 @@ const load_list_of_audited_findings_fas =()=>{
      var esection = '<?=$esection;?>';
      var carmaker = document.getElementById('carmaker').value;
      var carmodel = document.getElementById('carmodel').value;
+     var section = document.getElementById('section').value;
                 $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
@@ -45,7 +51,8 @@ const load_list_of_audited_findings_fas =()=>{
                     esection:esection,
                     lname:lname,
                     carmaker:carmaker,
-                    carmodel:carmodel
+                    carmodel:carmodel,
+                    section:section
                     
                 },success:function(response){
                     // console.log(response);
