@@ -7,6 +7,14 @@
   </footer>
 <?php
 //MODALS
+include '../../modals/sections/sec1.php';
+include '../../modals/sections/sec2.php';
+include '../../modals/sections/sec3.php';
+include '../../modals/sections/sec4.php';
+include '../../modals/sections/sec5.php';
+include '../../modals/sections/sec6.php';
+include '../../modals/sections/sec7.php';
+include '../../modals/sections/sec8.php';
 include '../../modals/logout.php';
 include '../../modals/admin/add_audit.php';
 include '../../modals/admin/add_line_audit.php';
@@ -15,6 +23,7 @@ include '../../modals/admin/update_lineaudit.php';
 include '../../modals/admin/import_audit.php';
 include '../../modals/admin/import_line_audit.php';
 include '../../modals/admin/count.php';
+
 ?>
 <!-- jQuery -->
 <!-- <script src="../../plugins/jquery/jquery.min.js"></script> -->

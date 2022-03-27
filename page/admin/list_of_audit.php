@@ -1,4 +1,3 @@
-
 <?php include 'plugins/navbar.php';?>
 <?php include 'plugins/sidebar/list_of_auditbar.php';?>
 
@@ -27,7 +26,17 @@
                     <div class="col-4">
                 <label for="">Audited Date To:</label>  <input type="date" id="auditeddateto" class="form-control" value="<?=$server_date_only;?>" autocomplete=off> 
                   </div>
+                  <div class="col-4">
+                      <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 100px;">
+                    <button class="btn btn-primary" id="searchReqBtn" onclick="load_count()">Search <i class="fas fa-search"></i></button> 
+                  </div>
+                </div>
+              </div>
+                  </div>
+                  
           </div>
+
           <!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -42,23 +51,130 @@
                 <h3 class="card-title">
                   <div class="row">
                      <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
-    <!--   <div class="col-4">
-       <label></label>
-      
-      </div>
-      <div class="col-3" id="count_for_update_data">
-        
-      </div> -->
+  <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-12">
+        <a href="" style="color:black;" data-toggle="modal" data-target="#sec1">    <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
 
-            <table>
-              <tr>
-                <th style="color: red;"> <b>Pending:</b> &nbsp;</th>
-                <th id="count_for_update_data"></th>
-              </tr>
-            </table>
-    </div>
-                  <br>
-                    <div class="row">
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 1</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec1"></label></label></label>  /  <label>Total: <label id="grand_total"></label></label> </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+        <a href="" style="color:black;" data-toggle="modal" data-target="#sec2">    <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 2</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec2"></label></label> / <label>Total: <label id="grand_total2"></label></label></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+      <a href="" style="color:black;" data-toggle="modal" data-target="#sec3">       <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 3</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec3"></label></label> / <label>Total: <label id="grand_total3"></label></label></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+       <a href="" style="color:black;" data-toggle="modal" data-target="#sec4">      <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 4</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec4"></label></label> / <label>Total: <label id="grand_total4"></label></label></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+
+         <div class="row">
+          <div class="col-md-3 col-sm-6 col-12">
+   <a href="" style="color:black;" data-toggle="modal" data-target="#sec5">           <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                 <span class="info-box-text"><b>Section 5</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec5"></label></label></label>  /  <label>Total: <label id="grand_total5"></label></label> </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+     <a href="" style="color:black;" data-toggle="modal" data-target="#sec6">         <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 6</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec6"></label></label> / <label>Total: <label id="grand_total6"></label></label></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+      <a href="" style="color:black;" data-toggle="modal" data-target="#sec7">        <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 7</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec7"></label></label> / <label>Total: <label id="grand_total7"></label></label></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+        <a href="" style="color:black;" data-toggle="modal" data-target="#sec8">      <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text"><b>Section 8</b></span>
+                <span class="info-box-number"><label style="color:red;">Pending: <label id="count_sec8"></label></label> / <label>Total: <label id="grand_total8"></label></label></span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        
+                   </div> 
+<div class="row">
             <table>
               <tr>
                 <th>
@@ -76,8 +192,17 @@
                   <input type="text" name="linen" id="linen" class="form-control">
                   </div>
                 </th>
-                <th></th><th></th><th></th><th></th>
-                <th>
+              </div>
+            </th>
+          </tr>
+        </table>
+      </div>
+      <br>
+
+        <div class="row">
+                <table>
+                  <tr>
+                    <th>
                   <div class="row">
                     <div class="col-4">
                  <span>Car Maker: </span>
@@ -86,6 +211,19 @@
                     <div class="col-4">
               <span>Car Model: </span>
                   <input type="text" name="carmodel" id="carmodel" class="form-control">
+                  </div>
+                    <div class="col-4">
+              <span>Position: </span>
+                 <select id="position" class="form-control" autocomplete=off> 
+                   <option value="">Select Position</option>
+                        <option value="associate">Associate</option>
+                        <option value="expert">Expert</option>
+                        <option value="jr.staff">Jr. Staff</option>
+                        <option value="staff">Staff</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="assistant manager">Assistant Manager</option>
+                        <option value="manager">Manager</option>
+                        </select>
                   </div>
                  
                 </th>
@@ -120,7 +258,7 @@
                     <div class="row">
 
                   <div class="col-5">
-              <button class="btn btn-info" data-toggle="modal" data-target="#count">Count</button>
+              <button class="btn btn-info" data-toggle="modal" data-target="#count">Audit&nbsp;Count</button>
                   </div>
                 </div>
                 </th>
@@ -162,6 +300,7 @@
                     <th style="text-align:center; display: none;">Audit Code:</th>
                     <th style="text-align:center;">Date Audited</th>
                     <th style="text-align:center;">Full Name</th>
+                    <th style="text-align:center;">Position</th>
                     <th style="text-align:center;">Employee ID</th>
                     <th style="text-align:center;">Provider</th>
                     <th style="text-align:center;">Group</th>

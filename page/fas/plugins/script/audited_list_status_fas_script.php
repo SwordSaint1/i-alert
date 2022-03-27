@@ -4,12 +4,15 @@ const load_list_of_audited_findings_fass_status =()=>{
     $('#spinner').css('display','block');
      var empid = document.getElementById('empid_audited_fass_status').value;
      var fname = document.getElementById('fname_audited_fass_status').value;
-     var lname = document.getElementById('lname_audited_fass_status').value;
+     var lname = document.getElementById('linename_audited_fass_status').value;
      var dateFrom = document.getElementById('fasauditedliststatusdatefrom').value;
      var dateTo = document.getElementById('fasauditedliststatusdateto').value;
+     var position = document.getElementById('position_status').value;
+     var carmaker = document.getElementById('carmaker_status').value;
+     var carmodel = document.getElementById('carmodel_status').value;
+     var audit_type = document.getElementById('audit_type_status').value;
      var esection = '<?=$esection;?>';
-     console.log();
-     console.log();
+
            $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
@@ -21,7 +24,11 @@ const load_list_of_audited_findings_fass_status =()=>{
                     empid:empid,
                     fname:fname,
                     esection:esection,
-                    lname:lname
+                    lname:lname,
+                    position:position,
+                    carmaker:carmaker,
+                    carmodel:carmodel,
+                    audit_type:audit_type
                     
                 },success:function(response){
                     // console.log(response);
@@ -128,4 +135,42 @@ const update_statuss =()=>{
    }
 }
 }
+
+
+const sent_date =()=>{
+   var arr = [];
+    $('input.singleCheck:checkbox:checked').each(function () {
+        arr.push($(this).val());
+    });
+    var numberOfChecked = arr.length;
+    if(numberOfChecked > 0){
+
+  
+    $.ajax({
+        url: '../../process/provider_processor.php',
+        type: 'POST',
+        cache: false,
+        data:{
+            method: 'send',
+            id:arr,
+            status:status
+      
+            
+        },success:function(response) {
+            console.log(response);
+            if (response == 'success') {
+             load_list_of_audited_findings_fass_status();
+             uncheck_all();
+                swal('SUCCESS!', 'Success', 'success');
+               
+            }else{
+                swal('FAILED', 'FAILED', 'error');
+            }
+        }
+    });
+   }
+}
+
+
+
 </script>

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-
+ 
  const create_audit =()=> {
 
     setTimeout(generateBatchID,100);
@@ -78,7 +78,7 @@ const save_request =()=> {
     var esection = '<?=$esection;?>';
     var username = '<?=$username;?>';
     var audit_code = document.querySelector('#auditCode').innerHTML;
-    
+    var section = document.querySelector('#section').value;
     if(employee_num == ''){      
         swal('Notification', 'Please Enter EMPLOYEE ID','info');
     }else if(audit_code == ''){     
@@ -113,6 +113,8 @@ const save_request =()=> {
         swal('Notification', 'Please Select Audit Category','info');
     }else if(remarks == ''){
         swal('Notification', 'Please Enter Remarks','info');
+    }else if(section == ''){
+        swal('Notification', 'Please Select Section','info');
     }else{
     $.ajax({
         url: '../../process/admin_processor.php',
@@ -138,7 +140,8 @@ const save_request =()=> {
             remarks:remarks,
             esection:esection,
             username:username,
-            audit_code:audit_code
+            audit_code:audit_code,
+            section:section
         },success:function(x){
           
          if (x == 'Successfully Saved'){
@@ -159,7 +162,7 @@ const save_request =()=> {
             $('#audit_type').val('');
             $('#audit_categ').val('');
             $('#remarks').val('');
-          
+            $('#section').val('');
            load_prev();     
          }
          else{

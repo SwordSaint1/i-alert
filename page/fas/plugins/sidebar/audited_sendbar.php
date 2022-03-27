@@ -34,14 +34,14 @@
           </li>
           
           <li class="nav-item">
-            <a href="audited_list_fas.php" class="nav-link active">
+            <a href="audited_list_fas.php" class="nav-link ">
               <i class=" fas fa-list"></i>
               <p>
               List of Audited
               </p>
             </a>
-          </li> 
-             <li class="nav-item">
+          </li>
+              <li class="nav-item">
             <a href="audited_list_status_fas.php" class="nav-link ">
               <i class=" fas fa-tasks"></i>
               <p>
@@ -49,15 +49,15 @@
               </p>
             </a>
           </li>
-            <li class="nav-item">
-            <a href="audited_send.php" class="nav-link">
+             <li class="nav-item">
+            <a href="audited_send.php" class="nav-link active">
               <i class=" fas fa-tasks"></i>
               <p>
               List of IR Sent
               </p>
             </a>
           </li>
-             <li class="nav-item">
+            <li class="nav-item">
             <a href="audit_recieved.php" class="nav-link">
               <i class=" fas fa-tasks"></i>
               <p>
@@ -65,6 +65,7 @@
               </p>
             </a>
           </li>
+           
         
           </li>  
          <?php include 'logout.php' ;?>

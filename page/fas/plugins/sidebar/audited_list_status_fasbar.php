@@ -49,6 +49,23 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="audited_send.php" class="nav-link">
+              <i class=" fas fa-tasks"></i>
+              <p>
+              List of IR Sent
+              </p>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a href="audit_recieved.php" class="nav-link">
+              <i class=" fas fa-tasks"></i>
+              <p>
+              List of Audited Recieved
+              </p>
+            </a>
+          </li>
+           
            
         
           </li>  

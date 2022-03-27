@@ -31,36 +31,57 @@
     </div>
     <!-- /.content-header -->
 
-    <div class="row">
+   <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
                     <div class="row">
-            <table>
-              <tr>
-                <th>
-                  <div class="row">
-                    <div class="col-4">
+                     <div class="col-3">
                 <span>Employee ID: </span>
                   <input type="text" name="empid" id="empid_audited_fass_status" class="form-control">
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                   <span>Full Name: </span>
                   <input type="text" name="fname" id="fname_audited_fass_status" class="form-control">
-                   </div>
+                  </div>
+                     <div class="col-3">
+                <span for="">Line no:</span>  <input type="text" id="linename_audited_fass_status" class="form-control" autocomplete=off> 
+                  </div>
+                   <div class="col-3">
+                <span for="">Position:</span>  <select id="position_status" class="form-control" autocomplete=off> 
+                   <option value="">Select Position</option>
+                        <option value="associate">Associate</option>
+                        <option value="expert">Expert</option>
+                        <option value="jr.staff">Jr. Staff</option>
+                        <option value="staff">Staff</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="assistant manager">Assistant Manager</option>
+                        <option value="manager">Manager</option>
+                        </select>
+                  </div>
+                    </div>
+
+                     <div class="row">
+                     <div class="col-4">
+                <span>Car Maker: </span>
+                  <input type="text" name="carmaker" id="carmaker_status" class="form-control">
+                    </div>
                     <div class="col-4">
-                  <span>Line Name: </span>
-                  <input type="text" name="lname" id="lname_audited_fass_status" class="form-control">
-                   </div>
-                </div>
-
-                </th>
-              </tr>
-
-            
-            </table>
-          </div>
+                  <span>Car Model: </span>
+                  <input type="text" name="carmodel" id="carmodel_status" class="form-control">
+                  <input type="hidden" name="count_section" id="count_section" value="<?=$section;?>">
+                  </div>
+                   <div class="col-4">
+                  <span>Audit Type: </span>
+                   <select class="form-control" id="audit_type_status">
+                        <option value="">Select Audit Type</option>
+                        <option value="initial">Initial</option>
+                        <option value="final">Final</option>
+                        <option value="warehouse">Warehouse</option>
+                    </select>
+                  </div>
+                    </div>
                 </h3>
 
                 <div class="card-tools">
@@ -100,10 +121,12 @@
                   <div class="col-12">
                           
                           <select class="form-control" id="status_fass">
-                          <option value="">Select Status</option>
+                          <option value="">Modify Status</option>
                           <option value="IR"> IR</option>
                           <option value="Written"> Written</option>
                           <option value="Verbal"> Verbal</option>
+                           <option value="awol"> Awol</option>
+                          <option value="resigned"> Resigned</option>
                         </select>
                   </div>
                 
@@ -119,6 +142,16 @@
           <th> <div class="row">
                      <div class="col-12 float-sm-right">
                         <button class="btn btn-primary float-sm-right" onclick="update_statuss()">Update</button>
+                  </div></th>
+                </div>
+
+                 <th>
+                </th>
+                <th> 
+                </th>
+           <th> <div class="row">
+                     <div class="col-12 float-sm-right">
+                        <button class="btn btn-info float-sm-right" onclick="sent_date()">Send </button>
                   </div></th>
                 </div>
         </table>
@@ -148,7 +181,7 @@
                     <th style="text-align:center;">Audit Category</th>
                     <th style="text-align:center;">Remarks</th> 
                     <th style="text-align:center;">Concerned Group Status</th>              
-                    <!-- <th style="text-align:center;">AGENCY Status</th>  -->
+                    <th style="text-align:center;">Date Sent</th> 
                     <th style="text-align:center;">HR Status</th> 
 
                 </thead>

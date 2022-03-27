@@ -12,11 +12,15 @@ if ($method == 'fetch_audited_list_rts') {
         $fname =$_POST['fname'];
         $esection = $_POST['esection'];
         $lname = $_POST['lname'];
+        $carmaker = $_POST['carmaker'];
+        $carmodel = $_POST['carmodel'];
+        $position = $_POST['position'];
+        $audit_type = $_POST['audit_type'];
         $c = 0;
 
     $query = "SELECT * FROM ialert_audit
-    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = 'FAS'  AND pd = 'IR'
-     AND hr IS NULL GROUP BY id ORDER BY date_audited ASC";
+    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = 'FAS'  AND pd = 'IR' AND hr IS NULL AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%' AND position LIKE '$position%' AND audit_type LIKE '$audit_type%'
+    GROUP BY id ORDER BY date_audited ASC";
 
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -38,6 +42,7 @@ if ($method == 'fetch_audited_list_rts') {
                 echo '<td style="display: none;">'.$x['batch'].'</td>';
                 echo '<td>'.$x['date_audited'].'</td>';
                  echo '<td>'.$x['full_name'].'</td>';
+                 echo '<td>'.$x['position'].'</td>';
                 echo '<td>'.$x['employee_num'].'</td>';
                 echo '<td>'.$x['provider'].'</td>';
                 echo '<td>'.$x['groups'].'</td>';
@@ -46,6 +51,7 @@ if ($method == 'fetch_audited_list_rts') {
                 echo '<td>'.$x['line_no'].'</td>';
                 echo '<td>'.$x['process'].'</td>';
                  echo '<td>'.$x['audit_findings'].'</td>';
+                 echo '<td>'.$x['audit_type'].'</td>';
                   echo '<td>'.$x['audited_by'].'</td>';
                   echo '<td>'.$x['audited_categ'].'</td>';
                    echo '<td>'.$x['remarks'].'</td>';
@@ -98,11 +104,15 @@ if ($method == 'fetch_audited_list_rts_checked') {
         $fname =$_POST['fname'];
         $esection = $_POST['esection'];
         $lname = $_POST['lname'];
+         $carmaker = $_POST['carmaker'];
+        $carmodel = $_POST['carmodel'];
+        $position = $_POST['position'];
+        $audit_type = $_POST['audit_type'];
         $c = 0;
 
     $query = "SELECT * FROM ialert_audit
-    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = 'FAS'  AND pd = 'IR'
-     AND hr != '' GROUP BY id ORDER BY date_audited ASC";
+    WHERE  employee_num LIKE '$empid%' AND full_name LIKE '$fname%' AND line_no LIKE '$lname%' AND (date_audited >='$dateFrom' AND date_audited <= '$dateTo')  AND provider = 'FAS'  AND pd = 'IR' AND hr IS NOT NULL AND car_maker LIKE '$carmaker%' AND car_model LIKE '$carmodel%' AND position LIKE '$position%' AND audit_type LIKE '$audit_type%'
+    GROUP BY id ORDER BY date_audited ASC";
 
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -159,7 +169,18 @@ if ($method == 'update_rts_checked') {
     //COUNT OF ITEM TO BE UPDATED
     $count = count($id);
     foreach($id as $x){
-        $update = "UPDATE ialert_audit SET hr = '$status' WHERE id = '$x'";
+
+        if ($status == 'undo') {
+            $update_undo = "UPDATE ialert_audit SET hr = NULL WHERE id = '$x'";
+            $stmt2 = $conn->prepare($update_undo);
+            if ($stmt2->execute()) {
+               // echo 'approved';
+            $count = $count - 1;
+        }else{
+            // echo 'error';
+        }
+        }else{
+             $update = "UPDATE ialert_audit SET hr = '$status' WHERE id = '$x'";
         $stmt = $conn->prepare($update);
         if ($stmt->execute()) {
             // echo 'approved';
@@ -167,6 +188,7 @@ if ($method == 'update_rts_checked') {
         }else{
             // echo 'error';
         }
+        }   
     }
         if($count == 0){
             echo 'success';

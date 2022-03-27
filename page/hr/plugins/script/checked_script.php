@@ -2,12 +2,16 @@
 	
 	const load_list_of_audited_findings_rts_checked =()=>{
     $('#spinner').css('display','block');
-     var empid = document.getElementById('empid_audited_rts_checked').value;
-     var fname = document.getElementById('fname_audited_rts_checked').value;
-     var lname = document.getElementById('linename_audited_rts_checked').value;
+     var empid = document.getElementById('empid_audited_fass_checked').value;
+     var fname = document.getElementById('fname_audited_fass_checked').value;
+     var lname = document.getElementById('linename_audited_fass_checked').value;
      var dateFrom = document.getElementById('rtsauditedlistcheckeddatefrom').value;
      var dateTo = document.getElementById('rtsauditedlistcheckeddateto').value;
      var esection = '<?=$esection;?>';
+       var carmaker = document.getElementById('carmaker_checked').value;
+     var carmodel = document.getElementById('carmodel_checked').value;
+     var position = document.getElementById('position_checked').value;
+     var audit_type = document.getElementById('audit_type_checked').value;
 
            $.ajax({
                 url: '../../process/rts_processor.php',
@@ -20,7 +24,11 @@
                     empid:empid,
                     fname:fname,
                     esection:esection,
-                    lname:lname
+                    lname:lname,
+                    carmaker:carmaker,
+                    carmodel:carmodel,
+                    position:position,
+                    audit_type:audit_type
                     
                 },success:function(response){
                     // console.log(response);

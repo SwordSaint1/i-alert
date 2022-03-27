@@ -5,14 +5,15 @@ $(document).ready(function(){
 
 const counts =()=>{
         var server_date = document.getElementById('server_date').value;
+        var esection = document.getElementById('esection').value;
         $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
                 cache: false,
                 data:{
                     method: 'count_for_update_provider',
-                    server_date:server_date
-                    
+                    server_date:server_date,
+                    esection:esection
                     
                 },success:function(response){
                     // console.log(response);

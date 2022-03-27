@@ -33,60 +33,72 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+ 
     <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                   <div class="row">
-      <div class="col-4">
-       <label><h3 style="color: red;"><b>Pending:</b></h3></label>
-       <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
-       <input type="hidden" name="carmakers" id="carmakers" value="<?=$car_maker;?>">
-      </div>
-      <div class="col-3 float-sm-left" id="count_for_update_data_fas">
-        
-      </div>
-    </div> 
-                  <br>
                     <div class="row">
-            <table>
-              <tr>
-                <th>
-                  <div class="row">
-                    <div class="col-4">
+                     <div class="col-3">
                 <span>Employee ID: </span>
                   <input type="text" name="empid" id="empid_audited_fas" class="form-control">
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                   <span>Full Name: </span>
                   <input type="text" name="fname" id="fname_audited_fas" class="form-control">
                   </div>
-                     <div class="col-4">
-                <span for="">Line Name:</span>  <input type="text" id="linename_audited_fas" class="form-control" autocomplete=off> 
+                     <div class="col-3">
+                <span for="">Line no:</span>  <input type="text" id="linename_audited_fas" class="form-control" autocomplete=off> 
                   </div>
-                </th>
-                <th></th><th></th><th></th><th></th><th></th><th></th>
-                <th>
-                  <div class="row">
-                      <div class="col-4">
+                   <div class="col-3">
+                <span for="">Position:</span>  <select id="position" class="form-control" autocomplete=off> 
+                   <option value="">Select Position</option>
+                        <option value="associate">Associate</option>
+                        <option value="expert">Expert</option>
+                        <option value="jr.staff">Jr. Staff</option>
+                        <option value="staff">Staff</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="assistant manager">Assistant Manager</option>
+                        <option value="manager">Manager</option>
+                        </select>
+                  </div>
+                    </div>
+
+                     <div class="row">
+                     <div class="col-4">
                 <span>Car Maker: </span>
                   <input type="text" name="carmaker" id="carmaker" class="form-control">
                     </div>
                     <div class="col-4">
                   <span>Car Model: </span>
                   <input type="text" name="carmodel" id="carmodel" class="form-control">
+                  <input type="hidden" name="count_section" id="count_section" value="<?=$section;?>">
                   </div>
-                    
+                   <div class="col-4">
+                  <span>Audit Type: </span>
+                   <select class="form-control" id="audit_type">
+                        <option value="">Select Audit Type</option>
+                        <option value="initial">Initial</option>
+                        <option value="final">Final</option>
+                        <option value="warehouse">Warehouse</option>
+                    </select>
                   </div>
-                </th>
-                </div>
-              </tr>
+                    </div>
+        
+              
 
-            
-            </table>
-          </div>
+            <br>
+                   <div class="row">
+    
+
+      <table>
+          <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+       <input type="hidden" name="carmakers" id="carmakers" value="<?=$car_maker;?>">
+         <th style="color: red;"> <b><font size="5">Pending:</font></b> &nbsp;</th>
+        <th id="count_for_update_data_fas"></th>
+      </table>
+    </div> 
                 </h3>
 
                 <div class="card-tools">
@@ -130,6 +142,8 @@
                           <option value="IR"> IR</option>
                           <option value="Written"> Written</option>
                           <option value="Verbal"> Verbal</option>
+                          <option value="awol"> Awol</option>
+                          <option value="resigned"> Resigned</option>
                         </select>
                   </div>
                 
@@ -163,13 +177,16 @@
                     <th style="text-align:center;">Date Audited</th>
                     <th style="text-align:center;">Full Name</th>
                     <th style="text-align:center;">Employee ID</th>
+                    <th style="text-align:center;">Position</th>
                     <th style="text-align:center;">Provider</th>
                     <th style="text-align:center;">Group</th>
                     <th style="text-align:center;">Car Maker</th>
                     <th style="text-align:center;">Car Model</th>
+                    <th style="text-align:center;">Section</th>
                     <th style="text-align:center;">Line No.</th>
                     <th style="text-align:center;">Process</th>
                     <th style="text-align:center;">Audit Findings</th>
+                    <th style="text-align:center;">Audit Type</th>
                     <th style="text-align:center;">Audited By</th>
                     <th style="text-align:center;">Audit Category</th>
                     <th style="text-align:center;">Remarks</th> 

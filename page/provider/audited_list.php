@@ -39,14 +39,15 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <div class="row">
-      <div class="col-4">
-       <label><h3 style="color: red;"><b>Pending:</b></h3></label>
-       <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
-      </div>
-      <div class="col-3 float-sm-left" id="count_for_update_data_provider">
-        
-      </div>
+  
+        <table>
+          <input type="hidden" name="server_date" id="server_date" value="<?=$server_date_only;?>">
+       <input type="hidden" name="esection" id="esection" value="<?=$esection;?>">
+         <th style="color: red;"> <b><font size="5">Pending:</font></b> &nbsp;</th>
+        <th id="count_for_update_data_provider"></th>
+      </table>
     </div>
+    <br>
 
                     <div class="row">
             <table>
@@ -129,6 +130,10 @@
                           <option value="IR"> IR</option>
                           <option value="Written"> Written</option>
                           <option value="Verbal"> Verbal</option>
+                          <option value="suspension"> Suspension</option>
+                          <option value="dismissal"> Dismissal</option>
+                          <option value="awol"> Awol</option>
+                          <option value="resigned"> Resigned</option>
                         </select>
                   </div>
                 

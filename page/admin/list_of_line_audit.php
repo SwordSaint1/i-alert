@@ -17,7 +17,17 @@
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">List of Line Audit Findings</li>
             </ol>
-          </div><!-- /.col -->
+          </div>
+          <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-6">
+                <span for="">Audited Date From:</span> <input type="date" id="lineauditeddatefrom" class="form-control" value="<?=$server_month;?>" autocomplete=off>
+                    </div>
+                    <div class="col-6">
+                <span for="">Audited Date To:</span>  <input type="date" id="lineauditeddateto" class="form-control" value="<?=$server_date_only;?>" autocomplete=off> 
+              </div>
+          </div>
+          <!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -32,32 +42,19 @@
                 		<div class="row">
  						<table>
  							<tr>
- 								<th>
- 									<div class="row">
- 										<div class="col-6">
- 								<span for="">Audited Date From:</span> <input type="date" id="lineauditeddatefrom" class="form-control" value="<?=$server_month;?>" autocomplete=off>
- 										</div>
- 										<div class="col-6">
- 								<span for="">Audited Date To:</span>  <input type="date" id="lineauditeddateto" class="form-control" value="<?=$server_date_only;?>" autocomplete=off> 
-
- 								</th>
- 								</div>
- 								</div>
- 								<th>
- 								</th>
- 								<th>
- 								</th>
- 								<th>
- 								</th>
-                <th>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
+ 							
                 <th>
                   <div class="row">
-                    <div class="col-12">
+                    
+                     <div class="col-4">
+                      <span>Car Maker:</span>
+                      <input type="text" name="car_maker" id="car_maker" class="form-control">
+                    </div>
+                     <div class="col-4">
+                      <span>Car Model:</span>
+                      <input type="text" name="car_model" id="car_model" class="form-control">
+                    </div>
+                    <div class="col-4">
                       <span>Line No:</span>
                       <input type="text" name="line_n" id="line_n" class="form-control">
                     </div>

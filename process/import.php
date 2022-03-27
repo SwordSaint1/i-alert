@@ -30,14 +30,14 @@
                       $audited_categ = $line[13];
                       $audit_type = $line[14];
                       $remark = $line[15];
-                      // $date_created = $line[17];
+                      $section = $line[16];
                     // || $line[17] == ''
                     // CHECK IF BLANK DATA
-                    if($line[0] == '' || $line[1] == '' || $line[2] == '' || $line[3] == '' || $line[4] == '' || $line[5] == '' || $line[6] == '' || $line[7] == '' || $line[8] == '' || $line[9] == '' || $line[10] == ''  || $line[11] == '' || $line[12] == '' || $line[13] == '' || $line[14] == ''  || $line[15] == '' ){
+                    if($line[0] == '' || $line[1] == '' || $line[2] == '' || $line[3] == '' || $line[4] == '' || $line[5] == '' || $line[6] == '' || $line[7] == '' || $line[8] == '' || $line[9] == '' || $line[10] == ''  || $line[11] == '' || $line[12] == '' || $line[13] == '' || $line[14] == ''  || $line[15] == '' || $line[16] == '' ){
                         // IF BLANK DETECTED ERROR += 1
                         $error = $error + 1;
                     }else{
-                        $insert = "INSERT INTO ialert_audit (`batch`,`date_audited`,`full_name`,`employee_num`,`provider`,`position`,`shift`,`groups`,`car_maker`,`car_model`,`line_no`,`process`,`audit_findings`,`audited_by`,`audited_categ`,`audit_type`,`remarks`,`date_created`) VALUES ('$ac','$date_audited','$full_name','$employee_num','$provider','$position','$shift','$group','$carmaker','$carmodel','$line_n','$emprocess','$audit_findings','$audited_by','$audited_categ','$audit_type','$remark','$server_date_only')";
+                        $insert = "INSERT INTO ialert_audit (`batch`,`date_audited`,`full_name`,`employee_num`,`provider`,`position`,`shift`,`groups`,`car_maker`,`car_model`,`line_no`,`process`,`audit_findings`,`audited_by`,`audited_categ`,`audit_type`,`remarks`,`date_created`,`section`) VALUES ('$ac','$date_audited','$full_name','$employee_num','$provider','$position','$shift','$group','$carmaker','$carmodel','$line_n','$emprocess','$audit_findings','$audited_by','$audited_categ','$audit_type','$remark','$server_date_only','$section')";
                         $stmt = $conn->prepare($insert);
                         if($stmt->execute()){
                             $error = 0;

@@ -34,35 +34,57 @@
     </div>
     <!-- /.content-header -->
 
-    <div class="row">
+     <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
                     <div class="row">
-            <table>
-              <tr>
-                <th>
-                  <div class="row">
-                    <div class="col-4">
+                     <div class="col-3">
                 <span>Employee ID: </span>
-                  <input type="text" name="empid" id="empid_audited_rts_checked" class="form-control">
+                  <input type="text" name="empid" id="empid_audited_fass_checked" class="form-control">
+                    </div>
+                    <div class="col-3">
+                  <span>Full Name: </span>
+                  <input type="text" name="fname" id="fname_audited_fass_checked" class="form-control">
+                  </div>
+                     <div class="col-3">
+                <span for="">Line no:</span>  <input type="text" id="linename_audited_fass_checked" class="form-control" autocomplete=off> 
+                  </div>
+                   <div class="col-3">
+                <span for="">Position:</span>  <select id="position_checked" class="form-control" autocomplete=off> 
+                   <option value="">Select Position</option>
+                        <option value="associate">Associate</option>
+                        <option value="expert">Expert</option>
+                        <option value="jr.staff">Jr. Staff</option>
+                        <option value="staff">Staff</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="assistant manager">Assistant Manager</option>
+                        <option value="manager">Manager</option>
+                        </select>
+                  </div>
+                    </div>
+
+                     <div class="row">
+                     <div class="col-4">
+                <span>Car Maker: </span>
+                  <input type="text" name="carmaker" id="carmaker_checked" class="form-control">
                     </div>
                     <div class="col-4">
-                  <span>Full Name: </span>
-                  <input type="text" name="fname" id="fname_audited_rts_checked" class="form-control">
+                  <span>Car Model: </span>
+                  <input type="text" name="carmodel" id="carmodel_checked" class="form-control">
+                  <input type="hidden" name="count_section" id="count_section" value="<?=$section;?>">
                   </div>
-                     <div class="col-4">
-                <span for="">Line Name:</span>  <input type="text" id="linename_audited_rts_checked" class="form-control" autocomplete=off> 
+                   <div class="col-4">
+                  <span>Audit Type: </span>
+                   <select class="form-control" id="audit_type_checked">
+                        <option value="">Select Audit Type</option>
+                        <option value="initial">Initial</option>
+                        <option value="final">Final</option>
+                        <option value="warehouse">Warehouse</option>
+                    </select>
                   </div>
-                </th>
-              
-                </div>
-              </tr>
-
-            
-            </table>
-          </div>
+                    </div>
                 </h3>
 
                 <div class="card-tools">
@@ -104,7 +126,7 @@
                           <select class="form-control" id="status_rts_checked">
                           <option value="">Select Status</option>
                           <option value="Recieved"> Recieved</option>
-                        
+                          <option value="undo"> Undo</option>
                         </select>
                   </div>
                 

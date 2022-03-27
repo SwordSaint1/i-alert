@@ -135,10 +135,46 @@
                </div>
                <div class="col-3">
                    <span>Remarks</span>
-                   <input type="text" name="" id="remarks" class="form-control-lg" autocomplete="OFF">
+                   <!-- <input type="text" name="" id="remarks" class="form-control-lg" autocomplete="OFF"> -->
+                   <input list="remark" id="remarks" class="form-control-lg" autocomplete="OFF">
+
+        <datalist id="remark">
+          <option value="N/A">
+          <option value="Support">
+        </datalist>
+
                </div>
            </div>
-         
+            <div class="row">
+                <div class="col-3">
+                   <span>Section:</span>
+                   <select class="form-control" name="section" id="section">
+                      <option value="">Select Section</option>
+                       <option value="section1">Section1</option>
+                       <option value="section2">Section2</option>
+                       <option value="section3">Section3</option>
+                       <option value="section4">Section4</option>
+                       <option value="section5">Section5</option>
+                       <option value="section6">Section6</option>
+                       <option value="section7">Section7</option>
+                       <option value="section8">Section8</option>
+                        <option value="battery">Battery</option>
+                         <option value="qa-initial">QA Initial</option>
+                          <option value="qa-final">QA Final</option>
+                           <option value="repair">Repair</option>
+                   </select>
+                </div>
+                 <div class="col-3">
+                 
+                </div>
+                 <div class="col-4">
+                   
+
+                    
+
+
+                </div>
+            </div>
            <br>
            <div class="row">
                         <div class="col-12">
@@ -171,7 +207,7 @@
                     <th>Audited By</th>
                     <th>Audit Category</th>
                     <th>Remarks</th>          
-      
+                    <th>Section</th> 
     </thead>
     <tbody id="data_preview_audit"></tbody>
 </table>

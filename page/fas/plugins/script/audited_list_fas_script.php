@@ -7,6 +7,7 @@ const counts =()=>{
         var server_date = document.getElementById('server_date').value;
         var car_maker = document.getElementById('carmakers').value;
         var esection = '<?$esection;?>';
+        var section = document.getElementById('count_section').value;
 
         console.log(car_maker);
         $.ajax({
@@ -17,7 +18,8 @@ const counts =()=>{
                     method: 'count_for_update_fas',
                     server_date:server_date,
                     car_maker:car_maker,
-                    esection:esection
+                    esection:esection,
+                    section:section
                     
                 },success:function(response){
                     // console.log(response);
@@ -38,11 +40,13 @@ const load_list_of_audited_findings_fas =()=>{
      var carmaker = document.getElementById('carmaker').value;
      var carmodel = document.getElementById('carmodel').value;
      var section = document.getElementById('section').value;
+     var audit_type = document.getElementById('audit_type').value;
+     var position = document.getElementById('position').value;
                 $.ajax({
                 url: '../../process/provider_processor.php',
                 type: 'POST',
                 cache: false,
-                data:{
+                data:{ 
                     method: 'fetch_audited_list_fas',
                     dateFrom:dateFrom,
 					dateTo:dateTo,
@@ -52,7 +56,9 @@ const load_list_of_audited_findings_fas =()=>{
                     lname:lname,
                     carmaker:carmaker,
                     carmodel:carmodel,
-                    section:section
+                    section:section,
+                    audit_type:audit_type,
+                    position:position
                     
                 },success:function(response){
                     // console.log(response);
@@ -132,7 +138,7 @@ const update_status_fas =()=>{
  if(status == ''){
          swal('ALERT','Select Status!','info'); 
 
-   } else{
+   } else{ 
 
     $.ajax({
         url: '../../process/provider_processor.php',

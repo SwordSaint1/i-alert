@@ -7,6 +7,8 @@ const load_list_of_line_audit_findings =()=>{
      var line_n = document.getElementById('line_n').value;
      var dateFrom = document.getElementById('lineauditeddatefrom').value;
      var dateTo = document.getElementById('lineauditeddateto').value;
+     var carmaker =document.getElementById('car_maker').value;
+     var carmodel =document.getElementById('car_model').value;
 
            $.ajax({
                 url: '../../process/admin_processor.php',
@@ -16,7 +18,9 @@ const load_list_of_line_audit_findings =()=>{
                     method: 'fetch_line_audit_list',
                     dateFrom:dateFrom,
 					dateTo:dateTo,
-                    line_n:line_n
+                    line_n:line_n,
+                    carmaker:carmaker,
+                    carmodel:carmodel
                     
                 },success:function(response){
                     // console.log(response);
